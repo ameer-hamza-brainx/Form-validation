@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Javascript</title>
+</head>
+
+<style>
+    .error {
+        color: red;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .left{
+        display: flex;
+        flex-direction: column;
+        gap:2px;
+        margin-top: 12px;
+    }
+</style>
+
+<body>
+    <form id="">
+        <div class="container">
+            <div class="left">
+                <label>FirstName:</label>
+                <label>LastName:</label>
+                <label>Age:</label>
+                <label>Password:</label>
+                <label>Confirm Password:</label>
+                <label>Email:</label>
+                <button type="submit">Submit</button>
+
+            </div>
+            <div class="right">
+                <div>
+                    <input type="text" id="FirstName" name="FirstName">
+                    <div class="FirstNameError error"></div>
+                </div>
+                <div>
+                    <input type="text" id="LastName" name="LastName">
+                    <div class="LastNameError error"></div>
+                </div>
+                <div>
+                    <input type="text" id="Age" name="Age">
+                    <div class="AgeError error"></div>
+                </div>
+                <div>
+                    <input type="text" id="Password" name="Password">
+                    <div class="PassError error"></div>
+                </div>
+                <div>
+                    <input type="text" id="ConfPassword" name="ConfPassword">
+                    <div class="ConfPassError error"></div>
+                </div>
+                <div>
+                    <input type="text" id="Email" name="Email">
+                    <div class="EmailError error"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</body>
+
+</html>
