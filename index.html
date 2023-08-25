@@ -16,8 +16,6 @@
     .container {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: 10px;
     }
     .left{
@@ -29,7 +27,7 @@
 </style>
 
 <body>
-    <form id="">
+    <form name="myform" method="post"  onsubmit="return validateform()" > 
         <div class="container">
             <div class="left">
                 <label>FirstName:</label>
@@ -38,37 +36,37 @@
                 <label>Password:</label>
                 <label>Confirm Password:</label>
                 <label>Email:</label>
-                <button type="submit" onSubmit="showData">Submit</button>
+                
 
             </div>
             <div class="right">
                 <div>
                     <input type="text" id="FirstName" name="FirstName">
-                    <div class="FirstNameError error"></div>
+                    <span class="FirstNameError error" id="FirstNameError"></span>
                 </div>
                 <div>
                     <input type="text" id="LastName" name="LastName">
-                    <div class="LastNameError error"></div>
+                    <span class="LastNameError error" id="LastNameError"></span>
                 </div>
                 <div>
-                    <input type="text" id="Age" name="Age">
-                    <div class="AgeError error"></div>
+                    <input type="number" id="Age" name="Age">
+                    <span class="AgeError error" id="AgeError"></span>
                 </div>
                 <div>
                     <input type="text" id="Password" name="Password">
-                    <div class="PassError error"></div>
+                    <span class="PassError error" id="PassError"></span>
                 </div>
                 <div>
                     <input type="text" id="ConfPassword" name="ConfPassword">
-                    <div class="ConfPassError error"></div>
+                    <span class="ConfPassError error" id="ConfPassError"></span>
                 </div>
                 <div>
                     <input type="text" id="Email" name="Email">
-                    <div class="EmailError error"></div>
+                    <span class="EmailError error" id="EmailError"></span>
                 </div>
             </div>
         </div>
-
+        <button type="submit">Submit</button>
 
     </form>
 </body>
