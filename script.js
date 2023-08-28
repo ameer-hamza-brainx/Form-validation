@@ -1,5 +1,10 @@
 
-// const outputElement = document.getElementById('output');
+let fnameFlag = false;
+let lnameFlag = false;
+let ageFlag = false;
+let passwordFlag = false;
+let confPasswordFlag = false;
+let emailFlag = false;
 
 document.addEventListener('DOMContentLoaded', function() {
     const firstName = document.getElementById("FirstName");
@@ -14,16 +19,26 @@ document.addEventListener('DOMContentLoaded', function() {
     let FirstName = firstName.value.trim();
     if (FirstName === '') {
         document.getElementById("FirstNameError").innerHTML = "Name field can't be blank!";
+        fnameFlag = false;
     }
     else
     {
         document.getElementById("FirstNameError").innerHTML = "";
+        fnameFlag = true;
     }
 
     // if(FirstName.length>5)
     // {
     //     document.myform.btn.removeAttribute('disabled');
     // }
+
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
+    }
 
   });
 
@@ -32,10 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let LastName = lastName.value.trim();
     if (LastName === '') {
         document.getElementById("LastNameError").innerHTML = "Name field can't be blank!";
+        lnameFlag = false;
     }
     else
     {
         document.getElementById("LastNameError").innerHTML = "";
+        lnameFlag = true;
+    }
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
     }
   });
 
@@ -44,38 +68,99 @@ document.addEventListener('DOMContentLoaded', function() {
     let Age = age.value.trim();
     if (Age === '') {
         document.getElementById("AgeError").innerHTML = "Age field can't be blank!";
+        ageFlag = false;
+    }
+    else if(Age < 18 || Age >151)
+    {
+        document.getElementById("AgeError").innerHTML = "Age must be between 18 and 151";
+        ageFlag = false;
     }
     else
     {
         document.getElementById("AgeError").innerHTML = "";
+        ageFlag = true;
+    }
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
     }
   });
 
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
   // Email 
     email.addEventListener('blur', function() {
-    let Email = email.value.trim();
-    if (Email === '') {
+    let Emails = email.value.split(',');
+    let EmailValid = true;
+    for(var i=0;i<Emails.length;i++)
+    {
+        if(!isValidEmail(Emails[i]))
+        {
+            EmailValid = false;
+        }
+    }
+    if (Emails[0] === '' || Emails ==null) {
         document.getElementById("EmailError").innerHTML = "Email field can't be blank!";
+        emailFlag = false;
+    }
+    else if(!EmailValid)
+    {
+        document.getElementById("EmailError").innerHTML = "Email is not valid!";
+        emailFlag = false;
     }
     else
     {
         document.getElementById("EmailError").innerHTML = "";
+        emailFlag = true;
+    }
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
     }
   });
 
+  
   //Password 
+  function isValidPassword(password) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    return passwordRegex.test(password);
+}
+  
   password.addEventListener('blur', function() {
     let Password = password.value.trim();
     if (Password === '') {
         document.getElementById("PassError").innerHTML = "Password field can't be blank!";
+        passwordFlag = false;
     }
     else if(Password.length<9)
     {
         document.getElementById("PassError").innerHTML = "password length must be greater than 8";
+        passwordFlag = false;
+    }
+    else if(!isValidPassword(Password)){
+        document.getElementById("PassError").innerHTML = "password must be alphanumeric and must contain at least one upper case and one the lower case";
+        passwordFlag = false;
     }
     else
     {
         document.getElementById("PassError").innerHTML = "";
+        passwordFlag = true;
+    }
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
     }
   });
 
@@ -84,58 +169,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (ConfPassword !== password.value) {
         console.log(password+" "+confPassword);
         document.getElementById("ConfPassError").innerHTML = "Password and confirm password doesn't match";
+        confPasswordFlag = false;
     }
     else
     {
         document.getElementById("ConfPassError").innerHTML = "";
+        confPasswordFlag = true;
+    }
+    if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
+    {
+        document.myform.btn.removeAttribute('disabled');
+    }
+    else{
+        document.myform.btn.setAttribute('disabled','disabled');
     }
   });
 });
 
-// function validateform(){  
-//     var FirstName=document.myform.FirstName.value;  
-//     var LastName=document.myform.LastName.value;  
-//     var Age=document.myform.Age.value;  
-//     var Password=document.myform.Password.value;  
-//     var ConfPassword=document.myform.ConfPassword.value;  
-//     var Email=document.myform.Email.value;  
-//     console.log(FirstName);
-
-//     if (FirstName==null || FirstName==""){  
-//     // alert("First Name can't be blank");  
-//     document.getElementById("FirstNameError").innerHTML = "Name field can't be blank!";
-//     return false;  
-//     }
-//     else if (LastName==null || LastName==""){  
-//     document.getElementById("LastNameError").innerHTML = "Name field can't be blank!";
-
-//     return false;  
-//     }
-//     else if (Age==null || Age==""){  
-//     document.getElementById("AgeError").innerHTML = "Age field can't be blank!";
-//     return false;  
-//     }
-//     else if (Password==null || Password==""){  
-//     document.getElementById("PassError").innerHTML = "Password field can't be blank!";
-//     return false;  
-//     }
-//     else if(Password.length<8){  
-//     document.getElementById("PassError").innerHTML = "Password length must be greater than 8!";
-//     return false;  
-//     }
-//     else if (ConfPassword==null || ConfPassword==""){  
-//     document.getElementById("ConfPassError").innerHTML = "Confirm Password field can't be blank!";  
-//     return false;  
-//     }
-//     else if (Email==null || Email==""){  
-//     document.getElementById("EmailError").innerHTML = "Email field can't be blank!";
-//     return false;  
-//     }
-
-    
-//     // else if(password.length<6){  
-//     // alert("Password must be at least 6 characters long.");  
-//     // return false;  
-//     // }
-
-// }  
