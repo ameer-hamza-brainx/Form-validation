@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     firstName.addEventListener('blur', function() {
     let FirstName = firstName.value.trim();
     if (FirstName === '') {
-        document.getElementById("FirstNameError").innerHTML = "Name field can't be blank!";
+        document.getElementById("FirstNameError").innerHTML = "First Name field can't be blank!";
         fnameFlag = false;
     }
     else
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lastName.addEventListener('blur', function() {
     let LastName = lastName.value.trim();
     if (LastName === '') {
-        document.getElementById("LastNameError").innerHTML = "Name field can't be blank!";
+        document.getElementById("LastNameError").innerHTML = "Last Name field can't be blank!";
         lnameFlag = false;
     }
     else
