@@ -15,11 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const email = document.getElementById("Email");
 
     // Name field
+    function isValidName(name) {
+    const onlyNumbersOrSpecial = /^[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/]+$/;
+    
+    return !onlyNumbersOrSpecial.test(name);
+    }
+
     firstName.addEventListener('blur', function() {
     let FirstName = firstName.value.trim();
     if (FirstName === '') {
         document.getElementById("FirstNameError").innerHTML = "First Name field can't be blank!";
         fnameFlag = false;
+    }
+    else if(!isValidName(FirstName))
+    {
+        document.getElementById("FirstNameError").innerHTML = "Name can not contains only numbers or special chracters!";
     }
     else
     {
@@ -48,6 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (LastName === '') {
         document.getElementById("LastNameError").innerHTML = "Last Name field can't be blank!";
         lnameFlag = false;
+    }
+    else if(!isValidName(LastName))
+    {
+        document.getElementById("LastNameError").innerHTML = "Name can not contains only numbers or special chracters!";
     }
     else
     {
@@ -131,8 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   //Password 
   function isValidPassword(password) {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    return passwordRegex.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    
+    return hasLowercase && hasUppercase;
 }
   
   password.addEventListener('blur', function() {
