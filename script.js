@@ -5,6 +5,8 @@ let ageFlag = false;
 let passwordFlag = false;
 let confPasswordFlag = false;
 let emailFlag = false;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const onlyNumbersOrSpecial = /^[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/]+$/;
 
 document.addEventListener('DOMContentLoaded', function() {
     const firstName = document.getElementById("FirstName");
@@ -13,21 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const password = document.getElementById("Password");
     const confPassword = document.getElementById("ConfPassword");
     const email = document.getElementById("Email");
-
+    
     // Name field
     function isValidName(name) {
-    const onlyNumbersOrSpecial = /^[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/]+$/;
     
     return !onlyNumbersOrSpecial.test(name);
     }
 
     firstName.addEventListener('blur', function() {
-    let FirstName = firstName.value.trim();
-    if (FirstName === '') {
+    let fName = firstName.value.trim();
+    if (fName === '') {
         document.getElementById("FirstNameError").innerHTML = "First Name field can't be blank!";
         fnameFlag = false;
     }
-    else if(!isValidName(FirstName))
+    else if(!isValidName(fName))
     {
         document.getElementById("FirstNameError").innerHTML = "Name can not contains only numbers or special chracters!";
     }
@@ -36,11 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("FirstNameError").innerHTML = "";
         fnameFlag = true;
     }
-
-    // if(FirstName.length>5)
-    // {
-    //     document.myform.btn.removeAttribute('disabled');
-    // }
 
     if(fnameFlag && lnameFlag && ageFlag && passwordFlag && confPasswordFlag && emailFlag)
     {
@@ -54,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Last name
     lastName.addEventListener('blur', function() {
-    let LastName = lastName.value.trim();
-    if (LastName === '') {
+    let lName = lastName.value.trim();
+    if (lName === '') {
         document.getElementById("LastNameError").innerHTML = "Last Name field can't be blank!";
         lnameFlag = false;
     }
-    else if(!isValidName(LastName))
+    else if(!isValidName(lName))
     {
         document.getElementById("LastNameError").innerHTML = "Name can not contains only numbers or special chracters!";
     }
@@ -79,12 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Age 
     age.addEventListener('blur', function() {
-    let Age = age.value.trim();
-    if (Age === '') {
+    let ageValue = age.value.trim();
+    if (ageValue === '') {
         document.getElementById("AgeError").innerHTML = "Age field can't be blank!";
         ageFlag = false;
     }
-    else if(Age < 18 || Age >151)
+    else if(ageValue < 18 || ageValue >151)
     {
         document.getElementById("AgeError").innerHTML = "Age must be between 18 and 151";
         ageFlag = false;
@@ -104,22 +100,22 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
     function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 
   // Email 
     email.addEventListener('blur', function() {
-    let Emails = email.value.split(',');
+    let emails = email.value.split(',');
     let EmailValid = true;
-    for(var i=0;i<Emails.length;i++)
+    for(var i=0;i<emails.length;i++)
     {
-        if(!isValidEmail(Emails[i]))
+        if(!isValidEmail(emails[i]))
         {
             EmailValid = false;
         }
     }
-    if (Emails[0] === '' || Emails ==null) {
+    
+    if (emails[0] === '' || emails ==null) {
         document.getElementById("EmailError").innerHTML = "Email field can't be blank!";
         emailFlag = false;
     }
@@ -145,24 +141,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
   //Password 
   function isValidPassword(password) {
-    const hasLowercase = /[a-z]/.test(password);
-    const hasUppercase = /[A-Z]/.test(password);
     
-    return hasLowercase && hasUppercase;
+    return /[a-z]/.test(password) && /[A-Z]/.test(password);
 }
   
   password.addEventListener('blur', function() {
-    let Password = password.value.trim();
-    if (Password === '') {
+    let passwordValue = password.value.trim();
+    if (passwordValue === '') {
         document.getElementById("PassError").innerHTML = "Password field can't be blank!";
         passwordFlag = false;
     }
-    else if(Password.length<9)
+    else if(passwordValue.length<9)
     {
         document.getElementById("PassError").innerHTML = "password length must be greater than 8";
         passwordFlag = false;
     }
-    else if(!isValidPassword(Password)){
+    else if(!isValidPassword(passwordValue)){
         document.getElementById("PassError").innerHTML = "password must be alphanumeric and must contain at least one upper case and one the lower case";
         passwordFlag = false;
     }
@@ -181,9 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   confPassword.addEventListener('blur', function() {
-    let ConfPassword = confPassword.value.trim();
-    if (ConfPassword !== password.value) {
-        console.log(password+" "+confPassword);
+    let confPasswordValue = confPassword.value.trim();
+    if (confPasswordValue !== password.value) {
         document.getElementById("ConfPassError").innerHTML = "Password and confirm password doesn't match";
         confPasswordFlag = false;
     }
